@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import "@fortawesome/fontawesome-svg-core/styles.css";
 
 :root {
   --background: #ffffff;
