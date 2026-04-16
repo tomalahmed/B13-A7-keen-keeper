@@ -68,7 +68,9 @@ export default async function FriendDetailPage({ params }) {
               ))}
             </div>
 
-            <p className="mt-5 text-sm italic text-gray-600">"{friend.bio}"</p>
+            <p className="mt-5 text-sm italic text-gray-600">
+              &quot;{friend.bio}&quot;
+            </p>
             <p className="mt-3 inline-flex items-center gap-2 text-sm text-gray-600">
               <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
               {friend.email}

@@ -5,7 +5,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useMemo, useState } from "react";
 
 import { useToast } from "@/context/ToastContext";
-
 import FriendCard from "@/components/FriendCard";
 
 function summarize(friends) {
@@ -17,10 +16,12 @@ function summarize(friends) {
       interactionsThisMonth: 0,
     };
   }
+
   const onTrack = friends.filter((f) => f.status === "On-Track").length;
   const needAttention = friends.filter(
     (f) => f.status === "Overdue" || f.status === "Almost Due",
   ).length;
+
   return {
     total: friends.length,
     onTrack,
@@ -34,7 +35,6 @@ export default function HomeDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
-
   const { pushToast } = useToast();
 
   useEffect(() => {
@@ -73,7 +73,10 @@ export default function HomeDashboard() {
 
   function handleStatusOptionClick(nextValue, label) {
     setStatusFilter(nextValue);
-    pushToast({ type: "success", message: `Demo: status option "${label}" clicked` });
+    pushToast({
+      type: "success",
+      message: `Demo: status option "${label}" clicked`,
+    });
   }
 
   function handleResetStatus() {
@@ -88,7 +91,7 @@ export default function HomeDashboard() {
           className="loading loading-spinner loading-lg text-[#1B4332]"
           aria-label="Loading friends"
         />
-        <p className="text-sm text-gray-600">Loading friends…</p>
+        <p className="text-sm text-gray-600">Loading friends...</p>
       </div>
     );
   }
@@ -97,9 +100,7 @@ export default function HomeDashboard() {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-2 bg-gray-100 px-4 py-24 text-center">
         <p className="font-medium text-red-700">{error}</p>
-        <p className="text-sm text-gray-600">
-          Check your connection and try again.
-        </p>
+        <p className="text-sm text-gray-600">Check your connection and try again.</p>
       </div>
     );
   }
@@ -119,9 +120,8 @@ export default function HomeDashboard() {
             Friends to keep close in your life
           </h1>
           <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
-            KeenKeeper helps you stay in touch with the people who matter—see
-            who needs a nudge and celebrate the relationships you are tending
-            well.
+            KeenKeeper helps you stay in touch with the people who matter - see
+            who needs a nudge and celebrate the relationships you are tending well.
           </p>
           <button
             type="button"
@@ -140,9 +140,7 @@ export default function HomeDashboard() {
               key={label}
               className="rounded-xl border border-gray-100 bg-white p-6 text-center shadow-md"
             >
-              <p className="text-3xl font-bold tabular-nums text-gray-900 sm:text-4xl">
-                {value}
-              </p>
+              <p className="text-3xl font-bold tabular-nums text-gray-900 sm:text-4xl">{value}</p>
               <p className="mt-2 text-sm font-medium text-gray-500">{label}</p>
             </div>
           ))}
@@ -186,6 +184,7 @@ export default function HomeDashboard() {
             Reset Status
           </button>
         </div>
+
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {filteredFriends.map((friend) => (
             <FriendCard key={friend.id} friend={friend} />

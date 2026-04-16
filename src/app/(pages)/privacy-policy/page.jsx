@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Privacy Policy | KeenKeeper",
+  description:
+    "Learn how KeenKeeper handles timeline entries stored in your browser for this demo app.",
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="flex min-h-0 flex-1 justify-center bg-gray-100 px-4 py-8 sm:px-6 lg:px-8">
@@ -25,7 +31,8 @@ export default function PrivacyPolicyPage() {
             What we store
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-gray-700">
-            Timeline entries that you add via "Quick Check-In" are saved locally
+            Timeline entries that you add via &quot;Quick Check-In&quot; are saved
+            locally
             in your browser. No server-side persistence is implemented in this
             assignment.
           </p>

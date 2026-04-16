@@ -27,9 +27,7 @@ export default function FriendCard({ friend }) {
         />
       </div>
       <h3 className="text-base font-semibold text-gray-900">{friend.name}</h3>
-      <p className="mt-1 text-sm text-gray-500">
-        {friend.days_since_contact}d ago
-      </p>
+      <p className="mt-1 text-sm text-gray-500">{friend.days_since_contact}d ago</p>
       <div className="mt-3 flex flex-wrap justify-center gap-1.5">
         {tags.map((tag) => (
           <span
@@ -40,9 +38,7 @@ export default function FriendCard({ friend }) {
           </span>
         ))}
       </div>
-      <span
-        className={`mt-4 inline-block rounded-full px-3 py-1 text-xs font-semibold ${badge}`}
-      >
+      <span className={`mt-4 inline-block rounded-full px-3 py-1 text-xs font-semibold ${badge}`}>
         {friend.status}
       </span>
     </Link>

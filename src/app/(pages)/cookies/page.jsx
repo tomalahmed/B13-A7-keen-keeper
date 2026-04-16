@@ -14,7 +14,7 @@ export default function CookiesPage() {
         <article className="mt-6 rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold text-gray-800">Summary</h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-700">
-            This demo uses your browser's localStorage to save Timeline
+            This demo uses your browser&apos;s localStorage to save Timeline
             entries. This is not shared with a server in this assignment.
           </p>
 
@@ -23,7 +23,7 @@ export default function CookiesPage() {
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-gray-700">
             You can reset the timeline from the Timeline page using the
-            "Reset Timeline" button.
+            &quot;Reset Timeline&quot; button.
           </p>
 
           <div className="mt-6">

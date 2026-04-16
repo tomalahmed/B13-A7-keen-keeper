@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Terms of Service | KeenKeeper",
+  description:
+    "Read the demo terms of service for KeenKeeper, including how timeline entries work in this assignment.",
+};
+
 export default function TermsOfServicePage() {
   return (
     <main className="flex min-h-0 flex-1 justify-center bg-gray-100 px-4 py-8 sm:px-6 lg:px-8">
@@ -14,7 +20,7 @@ export default function TermsOfServicePage() {
         <article className="mt-6 rounded-xl border border-gray-200 bg-white p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold text-gray-800">Summary</h2>
           <p className="mt-2 text-sm leading-relaxed text-gray-700">
-            This is a demo assignment for building a friend 'keeper' app.
+            This is a demo assignment for building a friend &apos;keeper&apos; app.
             The app includes a Timeline feature that stores entries in your
             browser (localStorage).
           </p>

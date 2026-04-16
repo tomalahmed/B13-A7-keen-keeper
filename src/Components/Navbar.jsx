@@ -1,11 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartLine,
-  faClock,
-  faHouse,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChartLine, faClock, faHouse } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,10 +38,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav
-          className="flex items-center gap-2 md:gap-8"
-          aria-label="Main navigation"
-        >
+        <nav className="flex items-center gap-2 md:gap-8" aria-label="Main navigation">
           {navItems.map(({ href, label, icon }) => {
             const active = isActive(pathname, href);
             return (

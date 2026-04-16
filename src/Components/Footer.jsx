@@ -55,11 +55,7 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} KeenKeeper. All rights reserved.</p>
           <div className="mt-3 flex flex-wrap items-center gap-5 sm:mt-0">
             {legalLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="transition-colors hover:text-white"
-              >
+              <Link key={link.label} href={link.href} className="transition-colors hover:text-white">
                 {link.label}
               </Link>
             ))}
