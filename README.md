@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KeenKeeper
+
+KeenKeeper is a modern Next.js web app for managing friendship check-ins, viewing interaction history, and tracking relationship health over time.
+
+It includes a dashboard, timeline, analytics view, legal pages, and a custom 404 experience, with a responsive UI designed for desktop and mobile.
+
+## Features
+
+- Friend dashboard with quick overview cards and status-based filtering
+- Timeline view for recording and reviewing check-ins
+- Stats page for interaction analytics and visual insights
+- Dynamic friend detail pages (`/friends/[id]`)
+- Local timeline persistence using browser storage
+- Toast notifications for interactive actions
+- Legal pages (`/privacy-policy`, `/terms-of-service`, `/cookies`)
+- Custom global `not-found` page
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4 + daisyUI
+- Font Awesome
+- Recharts
+- ESLint
+
+## Project Structure
+
+```text
+src/
+  app/
+    (pages)/
+      page.jsx
+      timeline/page.jsx
+      stats/page.jsx
+      friends/[id]/page.jsx
+      privacy-policy/page.jsx
+      terms-of-service/page.jsx
+      cookies/page.jsx
+    api/friends/route.js
+    layout.js
+    not-found.jsx
+  components/
+    HomeDashboard.jsx
+    Navbar.jsx
+    Footer.jsx
+    FriendCard.jsx
+    CheckInActions.jsx
+  context/
+    TimelineContext.jsx
+    ToastContext.jsx
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ (recommended: latest LTS)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Run in Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - start development server
+- `npm run build` - create production build
+- `npm run start` - run production server
+- `npm run lint` - run ESLint checks
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+KeenKeeper is ready for deployment on Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+When deploying from Windows to Linux-based environments (like Vercel), ensure path casing is consistent. This project uses `src/components` (lowercase), and imports should match that exact casing.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is provided for educational/assignment purposes.
