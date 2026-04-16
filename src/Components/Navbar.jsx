@@ -1,11 +1,11 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartLine, faClock, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faChartLine, faClock, faHouse } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useState } from "react";
 const navItems = [
   { href: "/", label: "Home", icon: faHouse },
   { href: "/timeline", label: "Timeline", icon: faClock },
@@ -19,6 +19,7 @@ function isActive(pathname, href) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
@@ -27,6 +28,7 @@ export default function Navbar() {
           href="/"
           className="flex shrink-0 items-center py-1"
           aria-label="KeenKeeper home"
+          onClick={() => setMobileOpen(false)}
         >
           <Image
             src="/assets/logo.png"
@@ -38,7 +40,11 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="flex items-center gap-2 md:gap-8" aria-label="Main navigation">
+        {/* Desktop navigation */}
+        <nav
+          className="hidden items-center gap-2 md:flex md:gap-8"
+          aria-label="Main navigation"
+        >
           {navItems.map(({ href, label, icon }) => {
             const active = isActive(pathname, href);
             return (
@@ -62,7 +68,52 @@ export default function Navbar() {
             );
           })}
         </nav>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1B4332] focus:ring-offset-2 md:hidden"
+          aria-label="Toggle main navigation"
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          <FontAwesomeIcon icon={faBars} className="h-5 w-5" />
+        </button>
       </div>
+
+      {/* Mobile navigation panel */}
+      {mobileOpen && (
+        <nav
+          className="border-t border-gray-200 bg-white md:hidden"
+          aria-label="Mobile navigation"
+        >
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 sm:px-6 lg:px-8">
+            {navItems.map(({ href, label, icon }) => {
+              const active = isActive(pathname, href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setMobileOpen(false)}
+                  className={
+                    active
+                      ? "inline-flex items-center gap-3 rounded-lg bg-[#1B4332] px-3 py-2 text-sm font-bold text-white"
+                      : "inline-flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#374151] hover:bg-gray-50"
+                  }
+                >
+                  <FontAwesomeIcon
+                    icon={icon}
+                    className="h-4 w-4 shrink-0"
+                    fixedWidth
+                  />
+                  <span>{label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
