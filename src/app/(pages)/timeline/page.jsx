@@ -13,6 +13,7 @@ import {
 import { useMemo, useState } from "react";
 
 import { useTimeline } from "@/context/TimelineContext";
+import { useToast } from "@/context/ToastContext";
 
 const typeIcon = {
   call: faPhone,
@@ -33,10 +34,20 @@ function formatDate(dateValue) {
 }
 
 export default function TimelinePage() {
-  const { entries, hydrated } = useTimeline();
+  const { entries, hydrated, resetEntries } = useTimeline();
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("newest");
+  const { pushToast } = useToast();
+
+  function handleResetTimeline() {
+    if (!hydrated) return;
+    setSearchQuery("");
+    setTypeFilter("all");
+    setSortOrder("newest");
+    resetEntries();
+    pushToast({ type: "success", message: "Timeline reset successfully" });
+  }
 
   const visibleEntries = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -68,6 +79,18 @@ export default function TimelinePage() {
         <p className="mt-2 text-sm text-gray-600">
           Recent calls, texts, and video check-ins with your friends.
         </p>
+        <div className="mt-4 flex justify-end">
+          <button
+            type="button"
+            onClick={handleResetTimeline}
+            disabled={!hydrated}
+            className={`rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 ${
+              !hydrated ? "cursor-not-allowed opacity-50" : ""
+            }`}
+          >
+            Reset Timeline
+          </button>
+        </div>
         <div className="mt-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:grid-cols-3">
           <label className="form-control w-full">
             <span className="mb-1 inline-flex items-center gap-2 text-sm font-medium text-gray-700">

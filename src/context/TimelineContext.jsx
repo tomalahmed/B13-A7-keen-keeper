@@ -63,6 +63,10 @@ export function TimelineProvider({ children }) {
         setEntries((prev) => [newEntry, ...prev]);
         return newEntry;
       },
+      resetEntries() {
+        // Clears timeline state; the localStorage write happens via the effect below.
+        setEntries([]);
+      },
     }),
     [entries, hydrated],
   );

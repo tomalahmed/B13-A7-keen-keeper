@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useMemo, useState } from "react";
 
+import { useToast } from "@/context/ToastContext";
+
 import FriendCard from "@/components/FriendCard";
 
 function summarize(friends) {
@@ -31,6 +33,9 @@ export default function HomeDashboard() {
   const [friends, setFriends] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  const { pushToast } = useToast();
 
   useEffect(() => {
     let cancelled = false;
@@ -60,6 +65,21 @@ export default function HomeDashboard() {
   }, []);
 
   const stats = useMemo(() => summarize(friends), [friends]);
+  const filteredFriends = useMemo(() => {
+    if (!Array.isArray(friends)) return [];
+    if (statusFilter === "all") return friends;
+    return friends.filter((f) => f.status === statusFilter);
+  }, [friends, statusFilter]);
+
+  function handleStatusOptionClick(nextValue, label) {
+    setStatusFilter(nextValue);
+    pushToast({ type: "success", message: `Demo: status option "${label}" clicked` });
+  }
+
+  function handleResetStatus() {
+    setStatusFilter("all");
+    pushToast({ type: "success", message: "Status filter reset successfully" });
+  }
 
   if (loading) {
     return (
@@ -130,11 +150,44 @@ export default function HomeDashboard() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-        <h2 className="mb-6 text-xl font-bold text-gray-900 sm:text-2xl">
-          Your Friends
-        </h2>
+        <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">Your Friends</h2>
+
+        <div className="mb-6 flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { value: "all", label: "All" },
+              { value: "On-Track", label: "On-Track" },
+              { value: "Almost Due", label: "Almost Due" },
+              { value: "Overdue", label: "Overdue" },
+            ].map(({ value, label }) => {
+              const active = statusFilter === value;
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => handleStatusOptionClick(value, label)}
+                  className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
+                    active
+                      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                      : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleResetStatus}
+            className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto"
+          >
+            Reset Status
+          </button>
+        </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {friends.map((friend) => (
+          {filteredFriends.map((friend) => (
             <FriendCard key={friend.id} friend={friend} />
           ))}
         </div>
